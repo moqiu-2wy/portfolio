@@ -1,0 +1,916 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李继豪 - 个人作品集</title>
+    <meta name="description" content="李继豪个人作品集，专注AIGC短剧工业化生产、AI模型评测、智能体开发及全链路内容运营。">
+    <style>
+        :root {
+            --bg: #F8F9FA;
+            --bg2: #FFFFFF;
+            --bg3: #EEF0F4;
+            --ink: #1A1A2E;
+            --muted: #6B7280;
+            --rule: rgba(0,0,0,0.08);
+            --accent: #3370FF;
+            --accent2: #FF8A00;
+            --accent3: #00C5CC;
+            --grad-p: linear-gradient(135deg,#3370FF,#00C5CC);
+            --grad-c: linear-gradient(135deg,#3370FF,#00A6B3);
+            --grad-w: linear-gradient(135deg,#FF8A00,#FFB800);
+            --grad-t: linear-gradient(135deg,#3370FF,#00C5CC,#FF8A00);
+            --glass: rgba(255,255,255,0.85);
+            --glass-b: rgba(0,0,0,0.06);
+            --sh-sm: 0 2px 8px rgba(0,0,0,0.06);
+            --sh-md: 0 8px 32px rgba(0,0,0,0.08);
+            --sh-lg: 0 16px 48px rgba(51,112,255,0.1);
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth;scroll-padding-top:64px}
+        body{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',-apple-system,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+        /* Background orbs */
+        .orbs{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+        .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.1;animation:fl 20s ease-in-out infinite}
+        .orb-1{width:600px;height:600px;background:radial-gradient(circle,#3370FF,transparent);top:-150px;left:-150px}
+        .orb-2{width:500px;height:500px;background:radial-gradient(circle,#FF8A00,transparent);top:25%;right:-100px;animation-delay:-5s}
+        .orb-3{width:550px;height:550px;background:radial-gradient(circle,#00C5CC,transparent);bottom:5%;left:15%;animation-delay:-10s}
+        .orb-4{width:400px;height:400px;background:radial-gradient(circle,#3370FF,transparent);top:55%;right:25%;animation-delay:-15s}
+        @keyframes fl{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.1)}66%{transform:translate(-40px,50px) scale(.95)}}
+
+        /* Nav */
+        nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:12px 0;transition:all .3s;background:rgba(248,249,250,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--rule)}
+        nav.scrolled{padding:8px 0;box-shadow:var(--sh-sm)}
+        .nav-c{max-width:1280px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center}
+        .nav-logo{font-size:1.2rem;font-weight:800;background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.02em}
+        .nav-links{display:flex;gap:28px;list-style:none}
+        .nav-links a{text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:500;transition:color .3s;position:relative}
+        .nav-links a:hover{color:var(--accent)}
+        .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--grad-p);border-radius:2px;transition:width .3s}
+        .nav-links a:hover::after{width:100%}
+        .nav-cta{padding:7px 18px;background:var(--grad-p);color:#fff;border:none;border-radius:100px;font-size:.82rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;box-shadow:0 4px 16px rgba(51,112,255,.3)}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(51,112,255,.5)}
+
+        /* Common */
+        section{padding:56px 24px;max-width:1280px;margin:0 auto}
+        .stag{display:inline-block;padding:5px 14px;background:rgba(51,112,255,.12);color:var(--accent);font-size:.75rem;font-weight:600;border-radius:100px;margin-bottom:10px;letter-spacing:.05em}
+        .stitle{font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-.02em}
+        .stitle.g{background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .ssub{color:var(--muted);font-size:.9rem;margin-bottom:32px;max-width:600px}
+
+        /* Hero */
+        .hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:60px;position:relative}
+        .hero-c{max-width:900px;animation:fiu 1s ease}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-b);border-radius:100px;font-size:.82rem;font-weight:600;color:var(--accent);margin-bottom:20px;box-shadow:var(--sh-sm)}
+        .hero-badge .dot{width:8px;height:8px;background:#22c55e;border-radius:50%;animation:pulse 2s ease-in-out infinite}
+        @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.6;transform:scale(1.3)}}
+        .hero h1{font-size:3.6rem;font-weight:900;letter-spacing:-.03em;margin:20px 0 14px;line-height:1.05}
+        .hero h1 .g{background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-tag{font-size:1.1rem;color:var(--muted);margin-bottom:28px;font-weight:400}
+        .hero-pos{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+        .ptag{padding:9px 22px;background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--glass-b);border-radius:100px;font-size:.85rem;font-weight:600;color:var(--ink);box-shadow:var(--sh-sm)}
+        .ptag.accent{background:var(--grad-p);color:#fff;border:none}
+        .hero-stats{display:flex;gap:36px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+        .hs{text-align:center}
+        .hs .n{font-size:2rem;font-weight:900;background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hs .l{font-size:.78rem;color:var(--muted);margin-top:2px}
+        .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+        /* Hero 个人信息卡片 */
+        .hero-info{display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;padding:18px 28px;background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:20px;box-shadow:var(--sh-md);margin-bottom:8px;max-width:680px;margin-left:auto;margin-right:auto}
+        .hero-info-left{display:flex;align-items:center;gap:14px;border-right:1px solid var(--rule);padding-right:24px}
+        .hero-avatar{width:56px;height:56px;border-radius:16px;background:var(--grad-p);display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:900;color:#fff;flex-shrink:0;box-shadow:0 4px 16px rgba(51,112,255,.4)}
+        .hero-name-block{text-align:left}
+        .hero-name{font-size:1.3rem;font-weight:800;color:var(--ink)}
+        .hero-title{font-size:.82rem;color:var(--muted);margin-top:2px}
+        .hero-info-right{display:flex;flex-direction:column;gap:8px;text-align:left}
+        .hero-info-item{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--ink);font-weight:500}
+        .hero-info-item .ii-icon{font-size:.95rem;width:20px;text-align:center;flex-shrink:0}
+        .btn-p{padding:13px 34px;background:var(--grad-p);color:#fff;border:none;border-radius:100px;font-size:.92rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;box-shadow:0 8px 24px rgba(51,112,255,.35);display:inline-flex;align-items:center;gap:8px}
+        .btn-p:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(51,112,255,.5)}
+        .btn-s{padding:13px 34px;background:var(--glass);backdrop-filter:blur(10px);color:var(--ink);border:1px solid var(--glass-b);border-radius:100px;font-size:.92rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:8px}
+        .btn-s:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--accent)}
+        .scroll-ind{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.78rem;animation:bnc 2s ease-in-out infinite}
+        @keyframes bnc{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
+        @keyframes fiu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+        /* About + Stats combined */
+        .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+        .card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:20px;padding:24px;box-shadow:var(--sh-md);transition:all .3s}
+        .card:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+        .card h3{font-size:1.15rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+        .card h3 .icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--grad-p);border-radius:10px;color:#fff;font-size:1.1rem;flex-shrink:0}
+        .card p{color:var(--muted);font-size:.88rem;margin-bottom:12px;line-height:1.7}
+        .card p strong{color:var(--ink)}
+        .edu{display:flex;align-items:center;gap:14px;padding:14px;background:rgba(51,112,255,.06);border-radius:14px;margin-bottom:12px}
+        .edu .ei{width:44px;height:44px;background:var(--grad-c);border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;flex-shrink:0}
+        .edu .et h4{font-size:.9rem;font-weight:700}
+        .edu .et p{font-size:.82rem;margin:0;color:var(--muted)}
+        .tp{display:flex;flex-direction:column;gap:10px}
+        .tpi{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,138,0,.06);border-left:4px solid var(--accent2);border-radius:10px}
+        .tpi .tic{font-size:1.3rem}
+        .tpi .tt h4{font-size:.9rem;font-weight:700}
+        .tpi .tt p{font-size:.78rem;margin:0;color:var(--muted)}
+        .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:20px}
+        .sc{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:16px;padding:18px 16px;text-align:center;box-shadow:var(--sh-sm);transition:all .3s}
+        .sc:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+        .sc .sn{font-size:1.8rem;font-weight:900;background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px}
+        .sc .sl{font-size:.78rem;color:var(--muted);font-weight:500}
+
+        /* Experience - compact */
+        .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+        .exp-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);transition:all .3s;border-left:3px solid var(--accent)}
+        .exp-card:hover{transform:translateX(4px);box-shadow:var(--sh-md)}
+        .exp-card:nth-child(2){border-left-color:var(--accent2)}
+        .exp-card:nth-child(3){border-left-color:var(--accent3)}
+        .exp-card:nth-child(4){border-left-color:#f59e0b}
+        .exp-head{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px;flex-wrap:wrap;gap:6px}
+        .exp-head h4{font-size:.98rem;font-weight:700}
+        .exp-head .co{color:var(--accent);font-size:.82rem;font-weight:600;margin-top:2px}
+        .exp-date{padding:3px 10px;background:rgba(51,112,255,.12);color:var(--accent);font-size:.72rem;font-weight:600;border-radius:100px;white-space:nowrap}
+        .exp-card p{font-size:.84rem;color:var(--muted);line-height:1.6}
+        .exp-card p strong{color:var(--ink)}
+
+        /* Works */
+        .works-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+        .work{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:20px;padding:24px;box-shadow:var(--sh-md);transition:all .3s;position:relative;overflow:hidden}
+        .work::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:var(--grad-p);opacity:0;transition:opacity .3s}
+        .work:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+        .work:hover::before{opacity:1}
+        .work.full{grid-column:span 2}
+        .w-head{display:flex;justify-content:space-between;align-items:start;margin-bottom:12px;gap:12px}
+        .w-icon{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;color:#fff;flex-shrink:0}
+        .w-icon.g1{background:var(--grad-p)}
+        .w-icon.g2{background:var(--grad-c)}
+        .w-icon.g3{background:var(--grad-w)}
+        .w-icon.g4{background:linear-gradient(135deg,#f59e0b,#ec4899)}
+        .w-icon.g5{background:linear-gradient(135deg,#10b981,#06b6d4)}
+        .w-icon.g6{background:linear-gradient(135deg,#8b5cf6,#6366f1)}
+        .w-cat{padding:3px 12px;background:rgba(51,112,255,.12);color:var(--accent);font-size:.72rem;font-weight:600;border-radius:100px;white-space:nowrap}
+        .work h3{font-size:1.2rem;font-weight:700;margin-bottom:4px}
+        .w-role{font-size:.82rem;color:var(--accent);font-weight:600;margin-bottom:12px}
+        .w-desc{color:var(--muted);font-size:.86rem;line-height:1.7;margin-bottom:14px}
+        .w-desc strong{color:var(--ink)}
+        .w-results{display:flex;gap:20px;flex-wrap:wrap;padding:12px;background:rgba(51,112,255,.04);border-radius:12px;margin-bottom:14px}
+        .wr{text-align:center;flex:1;min-width:70px}
+        .wr .n{font-size:1.3rem;font-weight:800;background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .wr .d{font-size:.72rem;color:var(--muted);margin-top:1px}
+        .w-features{list-style:none;padding:0;margin-bottom:14px}
+        .w-features li{padding:5px 0;font-size:.83rem;color:var(--muted);padding-left:22px;position:relative}
+        .w-features li::before{content:'✦';position:absolute;left:0;color:var(--accent)}
+        .w-features li strong{color:var(--ink)}
+        .w-tags{display:flex;gap:6px;flex-wrap:wrap}
+        .w-tag{padding:3px 10px;background:rgba(136,146,168,.1);color:var(--muted);font-size:.72rem;font-weight:500;border-radius:8px}
+        .w-sub{margin:16px 0 10px;color:var(--accent);font-size:15px;font-weight:600}
+        .w-note{margin:0 0 12px;font-size:13px;color:var(--muted);line-height:1.6}
+
+        /* Gallery */
+        .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0}
+        .shot{cursor:pointer;border-radius:12px;overflow:hidden;border:1px solid var(--rule);background:var(--bg);transition:all .3s;position:relative}
+        .shot:hover{transform:translateY(-3px);box-shadow:var(--sh-lg);border-color:var(--accent)}
+        .shot img{width:100%;height:auto;display:block;max-height:240px;object-fit:cover;object-position:top}
+        .shot.show img{max-height:320px;object-fit:contain;background:#0d0d18}
+        .shot .ov{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.8));padding:16px 12px 10px;opacity:0;transition:opacity .3s}
+        .shot:hover .ov{opacity:1}
+        .shot .ov span{color:#fff;font-size:.78rem;font-weight:600}
+        .shot .ov .zh{display:inline-flex;align-items:center;gap:4px;margin-top:3px;font-size:.68rem;color:rgba(255,255,255,.8)}
+        .shot.span2{grid-column:span 2}
+        .shot.span3{grid-column:span 3}
+        .vid{border-radius:12px;overflow:hidden;border:1px solid var(--rule);background:#0a0a0a;position:relative}
+        .vid video{width:100%;height:auto;display:block;max-height:300px;object-fit:contain}
+        .vid .vl{padding:10px 14px;background:var(--bg2);font-size:.8rem;font-weight:600;color:var(--accent);text-align:center}
+        .scene-box{margin-bottom:18px;padding:16px;background:var(--bg2);border-radius:14px;border:1px solid var(--rule)}
+        .scene-box h5{margin:0 0 10px;color:var(--accent2);font-size:14px}
+        .gal-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+
+        /* Lightbox */
+        .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;justify-content:center;align-items:center;cursor:zoom-out;padding:40px;backdrop-filter:blur(8px)}
+        .lb.active{display:flex}
+        .lb img{max-width:90%;max-height:90vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+        .lb-close{position:absolute;top:24px;right:24px;width:44px;height:44px;background:rgba(255,255,255,.15);border:none;border-radius:50%;color:#fff;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s}
+        .lb-close:hover{background:rgba(255,255,255,.3)}
+
+        /* Skills */
+        .skills-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+        .sk{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:16px;padding:20px;box-shadow:var(--sh-sm);transition:all .3s}
+        .sk:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+        .sk .si{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;margin-bottom:12px}
+        .sk h4{font-size:1rem;font-weight:700;margin-bottom:10px}
+        .sk-tags{display:flex;flex-wrap:wrap;gap:6px}
+        .sk-tag{padding:4px 10px;background:rgba(51,112,255,.08);color:var(--ink);font-size:.76rem;font-weight:500;border-radius:8px}
+
+        /* Contact */
+        .contact-sec{text-align:center;padding-bottom:48px}
+        .contact-card{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--glass-b);border-radius:28px;padding:48px 36px;box-shadow:var(--sh-lg);max-width:680px;margin:0 auto}
+        .contact-card h2{font-size:1.8rem;font-weight:800;margin-bottom:10px;background:var(--grad-t);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .contact-card p{color:var(--muted);margin-bottom:28px;font-size:.95rem}
+        .cm-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:28px}
+        .cm{display:flex;align-items:center;gap:10px;padding:12px 22px;background:var(--bg2);border-radius:14px;text-decoration:none;color:var(--ink);font-size:.88rem;font-weight:600;transition:all .3s}
+        .cm:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+        .cm .ci{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem}
+
+        /* Footer */
+        footer{text-align:center;padding:32px 24px;color:var(--muted);font-size:.78rem;border-top:1px solid var(--rule)}
+
+        /* Reveal */
+        .reveal{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+
+        /* Links box */
+        .link-box{margin:14px 0;padding:14px;background:rgba(51,112,255,.08);border-radius:12px;border:1px solid rgba(51,112,255,.2)}
+        .link-box p{margin:0 0 10px;font-size:13px;color:var(--muted)}
+        .link-btns{display:flex;flex-wrap:wrap;gap:10px}
+        .link-btns a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;background:var(--accent);color:#fff;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;transition:all .3s}
+        .link-btns a:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+        .link-btns a.alt{background:var(--accent2)}
+
+        /* Responsive */
+        @media(max-width:900px){
+            .nav-links{display:none}
+            .hero h1{font-size:2.5rem}
+            .about-grid,.works-grid,.skills-grid,.exp-grid{grid-template-columns:1fr}
+            .stats-row{grid-template-columns:repeat(2,1fr)}
+            .work.full{grid-column:span 1}
+            .stitle{font-size:1.6rem}
+            section{padding:44px 20px}
+            .gal{grid-template-columns:repeat(2,1fr)}
+            .shot.span3{grid-column:span 2}
+        }
+        @media(max-width:600px){
+            .hero h1{font-size:2rem}
+            .stats-row{grid-template-columns:1fr}
+            .hero-stats{gap:20px}
+            .hs .n{font-size:1.5rem}
+            .gal{grid-template-columns:1fr}
+            .shot.span2,.shot.span3{grid-column:span 1}
+            .gal-2{grid-template-columns:1fr}
+            .hero-info{flex-direction:column;gap:16px;padding:16px 20px}
+            .hero-info-left{border-right:none;border-bottom:1px solid var(--rule);padding-right:0;padding-bottom:16px}
+            .hero-info-right{align-items:center}
+        }
+    </style>
+</head>
+<body>
+    <div class="orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="orb orb-4"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-c">
+            <div class="nav-logo">李继豪</div>
+            <ul class="nav-links">
+                <li><a href="#about">简介</a></li>
+                <li><a href="#works">作品</a></li>
+                <li><a href="#films">影视</a></li>
+                <li><a href="#skills">技能</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">联系我</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-c">
+            <!-- 个人信息卡片 -->
+            <div class="hero-info">
+                <div class="hero-info-left">
+                    <div class="hero-avatar">李</div>
+                    <div class="hero-name-block">
+                        <div class="hero-name">李继豪</div>
+                        <div class="hero-title">南京传媒学院 · 数字媒体技术 · 2027届</div>
+                    </div>
+                </div>
+                <div class="hero-info-right">
+                    <div class="hero-info-item"><span class="ii-icon">💼</span><span>燃麦科技 · 统筹助理（实习）</span></div>
+                    <div class="hero-info-item"><span class="ii-icon">🔬</span><span>字节跳动 Seedance 模型评测</span></div>
+                    <div class="hero-info-item"><span class="ii-icon">📞</span><span>13451622125</span></div>
+                </div>
+            </div>
+
+            <h1><span class="g">个人</span>作品集</h1>
+            <p class="hero-tag">AIGC短剧工业化生产 · AI模型评测 · 智能体开发 · 全链路内容运营</p>
+
+            <div class="hero-stats">
+                <div class="hs"><div class="n">300+</div><div class="l">周交付AI短剧（集）</div></div>
+                <div class="hs"><div class="n">500+</div><div class="l">Prompt对照测试（组）</div></div>
+                <div class="hs"><div class="n">70%</div><div class="l">团队人均产能提升</div></div>
+                <div class="hs"><div class="n">7</div><div class="l">核心作品项目</div></div>
+            </div>
+            <div class="hero-cta">
+                <a href="#works" class="btn-p">查看作品 →</a>
+                <a href="#contact" class="btn-s">联系我</a>
+            </div>
+        </div>
+        <div class="scroll-ind">↓ 向下滚动探索</div>
+    </section>
+
+    <!-- About + Stats -->
+    <section id="about" class="reveal">
+        <span class="stag">ABOUT</span>
+        <h2 class="stitle g">个人简介</h2>
+        <p class="ssub">兼具AI技术理解力与运营方法论的内容操盘手</p>
+        <div class="about-grid">
+            <div class="card">
+                <h3><span class="icon">🎓</span>教育背景</h3>
+                <div class="edu">
+                    <div class="ei">🏫</div>
+                    <div class="et">
+                        <h4>南京传媒学院 · 智能媒体工程学院</h4>
+                        <p>数字媒体技术专业 | 2023.9 - 2027.6</p>
+                    </div>
+                </div>
+                <p><strong>主修课程：</strong>AIGC多模态内容创作、新媒体创意运营、数据库原理、短视频解构与分析</p>
+                <p>兼具技术底层理解与内容创意能力，能够将AI技术能力转化为产品运营的实际产出。</p>
+            </div>
+            <div class="card">
+                <h3><span class="icon">🎯</span>核心竞争力</h3>
+                <div class="tp">
+                    <div class="tpi">
+                        <span class="tic">🤖</span>
+                        <div class="tt"><h4>AI全链路运营</h4><p>模型评测、智能体搭建、AI内容生产全链路经验，深耕AIGC落地场景</p></div>
+                    </div>
+                    <div class="tpi">
+                        <span class="tic">📊</span>
+                        <div class="tt"><h4>数据驱动迭代</h4><p>擅长SOP搭建、数据驱动迭代、流程标准化，具备多项目并行管控能力</p></div>
+                    </div>
+                </div>
+                <p style="margin-top:12px;">拥有<strong>字节跳动Seedance模型评测</strong>实践经验，独立搭建AI短剧工业化量产流程，实现<strong>月度120+集成片交付</strong>。</p>
+            </div>
+        </div>
+        <div class="stats-row">
+            <div class="sc"><div class="sn">120+</div><div class="sl">月度AI短剧交付（集）</div></div>
+            <div class="sc"><div class="sn">300+</div><div class="sl">单周稳定供给（集）</div></div>
+            <div class="sc"><div class="sn">500+</div><div class="sl">Prompt对照测试（组）</div></div>
+            <div class="sc"><div class="sn">130+</div><div class="sl">Badcase归因分析（条）</div></div>
+            <div class="sc"><div class="sn">50W+</div><div class="sl">直播累计观看（人次）</div></div>
+            <div class="sc"><div class="sn">30W+</div><div class="sl">活动线上观看量</div></div>
+            <div class="sc"><div class="sn">70%</div><div class="sl">人均产能提升</div></div>
+            <div class="sc"><div class="sn">40%+</div><div class="sl">活动报名转化率</div></div>
+        </div>
+    </section>
+
+    <!-- Works - Reordered by Importance -->
+    <section id="works" class="reveal">
+        <span class="stag">PORTFOLIO</span>
+        <h2 class="stitle g">作品展示</h2>
+        <p class="ssub">7个核心项目，覆盖AI内容生产、工具开发、全链路运营</p>
+        <div class="works-grid">
+            <!-- Work 1: AI短剧工业化量产体系 (MOST RELEVANT) -->
+            <div class="work full">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g1">🎬</div>
+                        <div><h3>AI短剧工业化量产体系</h3><div class="w-role">统筹助理 · 上海燃麦科技</div></div>
+                    </div>
+                    <span class="w-cat">AI产品运营</span>
+                </div>
+                <p class="w-desc">从0到1搭建AI短剧工业化量产流程，覆盖<strong>脚本生成→分镜视觉→AI动态素材→剪辑调色→本土化字幕→成片交付</strong>全链路。协同团队搭建标准化AIGC生产链路，实现海外AI营销短剧的规模化稳定供给。</p>
+                <div class="w-results">
+                    <div class="wr"><div class="n">120+</div><div class="d">月度交付（集）</div></div>
+                    <div class="wr"><div class="n">300+</div><div class="d">单周供给（集）</div></div>
+                    <div class="wr"><div class="n">70%</div><div class="d">人均产能提升</div></div>
+                    <div class="wr"><div class="n">↓大幅</div><div class="d">内容返修率</div></div>
+                </div>
+                <h4 class="w-sub">🎬 短剧AI生成示例（VibeReels平台）</h4>
+                <p class="w-note">以下展示使用VibeReels平台进行AI短剧分镜创作的完整流程：左侧为分镜提示词（含画面风格、人物一致性规则、分镜时间轴），右侧为AI生成的对应视频。项目共11集、250+分镜，通过角色编号绑定系统（@1/@2/@3）确保跨镜头角色一致性。</p>
+                <div class="scene-box">
+                    <h5>📍 场景一：银月狼族祭坛 · EP1#1</h5>
+                    <div class="gal-2">
+                        <div class="shot show" onclick="openLightbox('assets/drama_prompt_altar.jpg')">
+                            <img loading="lazy" src="assets/drama_prompt_altar.jpg" alt="银月狼族祭坛提示词">
+                            <div class="ov"><span>分镜提示词 — 15秒 · 5个镜头</span><div class="zh">🔍 点击查看大图</div></div>
+                        </div>
+                        <div class="vid">
+                            <video controls preload="metadata" poster="assets/drama_video_altar_cover.jpg">
+                                <source src="assets/drama_video_altar.mp4" type="video/mp4">您的浏览器不支持视频播放
+                            </video>
+                            <div class="vl">AI生成视频 — 银月狼族祭坛审讯场景</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scene-box">
+                    <h5>📍 场景二：星辉皇家宴会大厅 · EP1#5</h5>
+                    <div class="gal-2">
+                        <div class="shot show" onclick="openLightbox('assets/drama_prompt_feast.jpg')">
+                            <img loading="lazy" src="assets/drama_prompt_feast.jpg" alt="星辉宴会厅提示词">
+                            <div class="ov"><span>分镜提示词 — 14秒 · 4个镜头</span><div class="zh">🔍 点击查看大图</div></div>
+                        </div>
+                        <div class="vid">
+                            <video controls preload="metadata" poster="assets/drama_video_feast_cover.jpg">
+                                <source src="assets/drama_video_feast.mp4" type="video/mp4">您的浏览器不支持视频播放
+                            </video>
+                            <div class="vl">AI生成视频 — 精灵宴会厅星露酒狂欢</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-tags">
+                    <span class="w-tag">AIGC内容生产</span><span class="w-tag">SOP搭建</span><span class="w-tag">流程标准化</span><span class="w-tag">团队培训</span><span class="w-tag">数据复盘</span><span class="w-tag">多项目管理</span>
+                </div>
+            </div>
+
+            <!-- Work 2: Coze智能体「麦麦」 -->
+            <div class="work full">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g3">🤖</div>
+                        <div><h3>Coze智能体「麦麦」开发</h3><div class="w-role">独立开发者 · 短剧项目统筹管理智能体</div></div>
+                    </div>
+                    <span class="w-cat">AI产品运营</span>
+                </div>
+                <p class="w-desc">使用Coze搭建智能体「麦麦」，解决短剧制作全流程中的<strong>项目进度管理、供应商SOP答疑、资源分发</strong>三大痛点。供应商可直接在群内向Agent提问，获取制作规范、网盘资源链接及项目进度，大幅减少人工沟通成本。</p>
+                <div class="gal">
+                    <div class="shot" onclick="openLightbox('assets/coze_agent_1_resource.png')">
+                        <img loading="lazy" src="assets/coze_agent_1_resource.png" alt="资源分发Agent">
+                        <div class="ov"><span>功能一：资源分发 Agent</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot" onclick="openLightbox('assets/coze_agent_2_sop_rules.png')">
+                        <img loading="lazy" src="assets/coze_agent_2_sop_rules.png" alt="拆集规则SOP问答">
+                        <div class="ov"><span>功能二：拆集规则 SOP 问答</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot" onclick="openLightbox('assets/coze_agent_3_editing_sop.jpg')">
+                        <img loading="lazy" src="assets/coze_agent_3_editing_sop.jpg" alt="剪辑流程SOP问答">
+                        <div class="ov"><span>功能三：剪辑全流程 SOP 问答</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot span3" onclick="openLightbox('assets/coze_agent_4_project_query.png')">
+                        <img loading="lazy" src="assets/coze_agent_4_project_query.png" alt="项目进度查询">
+                        <div class="ov"><span>功能四：项目进度查询</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <ul class="w-features">
+                    <li><strong>进度查询Agent：</strong>整合各短剧项目进度信息，供应商输入剧名即可查询当前状态、剪辑集数与供应商分配</li>
+                    <li><strong>SOP问答Agent：</strong>将全流程制作SOP塞入Agent，自动解答供应商制作中的疑问，7×24小时响应</li>
+                    <li><strong>资源分发Agent：</strong>提供成片所需的音频预设、人名条预设等网盘链接，供应商按需自取</li>
+                </ul>
+                <div class="w-tags">
+                    <span class="w-tag">Coze</span><span class="w-tag">智能体搭建</span><span class="w-tag">SOP知识库</span><span class="w-tag">流程自动化</span><span class="w-tag">供应商管理</span><span class="w-tag">资源分发</span>
+                </div>
+            </div>
+
+            <!-- Work 3: Trae视频质检系统 -->
+            <div class="work full">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g4">⚡</div>
+                        <div><h3>短剧视频质检系统</h3><div class="w-role">独立开发者 · Trae开发 + GitHub部署</div></div>
+                    </div>
+                    <span class="w-cat">流程优化</span>
+                </div>
+                <p class="w-desc">使用Trae开发「短剧视频质检系统」并部署为GitHub网站，面向短剧交付场景实现<strong>批量视频参数自动检测、不合格项红色预警、字幕匹配校验</strong>三大核心功能，大幅提升审片效率。</p>
+                <div class="gal">
+                    <div class="shot" onclick="openLightbox('assets/trae_qc_3.png')">
+                        <img loading="lazy" src="assets/trae_qc_3.png" alt="批量导入视频首页">
+                        <div class="ov"><span>批量导入视频首页</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot" onclick="openLightbox('assets/trae_qc_1.png')">
+                        <img loading="lazy" src="assets/trae_qc_1.png" alt="检测结果与统计">
+                        <div class="ov"><span>检测结果与统计可视化</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot" onclick="openLightbox('assets/trae_qc_2.png')">
+                        <img loading="lazy" src="assets/trae_qc_2.png" alt="数据可视化与参数明细">
+                        <div class="ov"><span>码率分布图与参数明细表</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot" onclick="openLightbox('assets/trae_qc_4.png')">
+                        <img loading="lazy" src="assets/trae_qc_4.png" alt="字幕匹配检测导入">
+                        <div class="ov"><span>字幕匹配检测 — 文件导入</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot span2" onclick="openLightbox('assets/trae_qc_5.png')">
+                        <img loading="lazy" src="assets/trae_qc_5.png" alt="字幕匹配检测结果">
+                        <div class="ov"><span>字幕匹配检测 — 结果统计与CSV导出</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <ul class="w-features">
+                    <li><strong>视频参数批量质检：</strong>基于FFmpeg自动提取分辨率、帧率、码率等参数，对照预设标准自动判定，不合格项红色醒目标记</li>
+                    <li><strong>数据可视化看板：</strong>通过率环形图 + 码率分布柱状图 + 参数明细表三层信息架构，支持导出CSV报告</li>
+                    <li><strong>字幕匹配检测：</strong>自动检查视频是否存在同名SRT字幕文件，校验时间轴格式与文本重叠问题</li>
+                </ul>
+                <div class="w-tags">
+                    <span class="w-tag">Trae</span><span class="w-tag">GitHub部署</span><span class="w-tag">FFmpeg</span><span class="w-tag">批量质检</span><span class="w-tag">数据可视化</span><span class="w-tag">字幕匹配</span><span class="w-tag">CSV导出</span><span class="w-tag">深色主题UI</span>
+                </div>
+            </div>
+
+            <!-- Work 4: TapNow视频制作 -->
+            <div class="work full">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g2">✨</div>
+                        <div><h3>TapNow视频制作</h3><div class="w-role">AI视频创作 · 提示词工程 · 节点式工作流</div></div>
+                    </div>
+                    <span class="w-cat">内容创作</span>
+                </div>
+                <p class="w-desc">使用TapNow进行AI视频创作，通过<strong>节点式工作流</strong>构建从图片生成到视频输出的完整创作链路。涵盖武侠暗黑奇幻、角色叙事等多种风格，每个项目包含40-100个生成节点。</p>
+                <h4 class="w-sub">🎬 AI生成视频作品</h4>
+                <div class="gal-2">
+                    <div class="vid">
+                        <video controls preload="metadata" poster="assets/tapnow_video_wuxia_cover.jpg">
+                            <source src="assets/tapnow_video_wuxia.mp4" type="video/mp4">您的浏览器不支持视频播放，请<a href="assets/tapnow_video_wuxia.mp4">点击下载观看</a>
+                        </video>
+                        <div class="vl">「剑」— 武侠暗黑奇幻风格 · TapNow生成</div>
+                    </div>
+                    <div class="vid">
+                        <video controls preload="metadata" poster="assets/tapnow_video_story_cover.jpg">
+                            <source src="assets/tapnow_video_story.mp4" type="video/mp4">您的浏览器不支持视频播放，请<a href="assets/tapnow_video_story.mp4">点击下载观看</a>
+                        </video>
+                        <div class="vl">「花束」— 角色叙事风格 · TapNow生成</div>
+                    </div>
+                </div>
+                <h4 class="w-sub">🎨 TapNow 画布展示</h4>
+                <div class="gal-2">
+                    <div class="shot show" onclick="openLightbox('assets/tapnow_canvas_wuxia.jpg')">
+                        <img loading="lazy" src="assets/tapnow_canvas_wuxia.jpg" alt="武侠风格项目画布">
+                        <div class="ov"><span>武侠暗黑奇幻 · 50+节点</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/tapnow_canvas_story.jpg')">
+                        <img loading="lazy" src="assets/tapnow_canvas_story.jpg" alt="角色故事项目画布">
+                        <div class="ov"><span>角色叙事 · 80+节点</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <div class="link-box">
+                    <p>🔗 点击下方链接可在TapNow中查看完整的交互式画布：</p>
+                    <div class="link-btns">
+                        <a href="https://app.tapnow.ai/tapflow/view/a484edfe" target="_blank" rel="noopener">🎬 查看「武侠风格」画布</a>
+                        <a href="https://app.tapnow.ai/tapflow/view/1083c92d" target="_blank" rel="noopener" class="alt">📖 查看「角色故事」画布</a>
+                    </div>
+                </div>
+                <div class="w-tags">
+                    <span class="w-tag">TapNow</span><span class="w-tag">提示词工程</span><span class="w-tag">AI视频生成</span><span class="w-tag">节点式工作流</span><span class="w-tag">武侠风格</span><span class="w-tag">角色叙事</span><span class="w-tag">Skill复用</span>
+                </div>
+            </div>
+
+            <!-- Work 5: 新媒体账号运营 -->
+            <div class="work full">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g3">📱</div>
+                        <div><h3>新媒体账号运营</h3><div class="w-role">全平台运营 · 数据驱动 · B2B & B2C</div></div>
+                    </div>
+                    <span class="w-cat">内容运营</span>
+                </div>
+                <p class="w-desc">运营新媒体账号，覆盖小红书、公众号、视频号、抖音等平台，具备<strong>后台数据分析</strong>经验。负责佳谱仪器公众号及视频号全链路运营，产出89篇原创技术内容；抖音账号获赞3863+，粉丝3039+。</p>
+                <h4 class="w-sub">💬 微信公众号 & 视频号</h4>
+                <div class="gal">
+                    <div class="shot show" onclick="openLightbox('assets/wechat_articles.jpg')">
+                        <img loading="lazy" src="assets/wechat_articles.jpg" alt="微信公众号文章列表">
+                        <div class="ov"><span>公众号文章列表 — 39篇原创</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/wechat_video_channel.jpg')">
+                        <img loading="lazy" src="assets/wechat_video_channel.jpg" alt="视频号主页">
+                        <div class="ov"><span>视频号主页 — 产品视频矩阵</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/wechat_video_detail.jpg')">
+                        <img loading="lazy" src="assets/wechat_video_detail.jpg" alt="视频号视频详情">
+                        <div class="ov"><span>视频号内容 — T650S膜厚仪</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/wechat_autumn_outing.jpg')">
+                        <img loading="lazy" src="assets/wechat_autumn_outing.jpg" alt="秋游推文配图">
+                        <div class="ov"><span>推文配图 — 秋游进行时</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/wechat_bonfire.jpg')">
+                        <img loading="lazy" src="assets/wechat_bonfire.jpg" alt="篝火晚会推文">
+                        <div class="ov"><span>推文配图 — 篝火晚会</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <h4 class="w-sub">🎵 抖音运营</h4>
+                <div class="gal-2">
+                    <div class="shot show" onclick="openLightbox('assets/douyin_profile.jpg')">
+                        <img loading="lazy" src="assets/douyin_profile.jpg" alt="抖音主页数据">
+                        <div class="ov"><span>抖音主页 — 3863获赞 / 3039粉丝</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/douyin_video_detail.jpg')">
+                        <img loading="lazy" src="assets/douyin_video_detail.jpg" alt="抖音视频详情">
+                        <div class="ov"><span>视频内容 — 紧固件镀层检测</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <div class="w-tags">
+                    <span class="w-tag">小红书运营</span><span class="w-tag">公众号运营</span><span class="w-tag">视频号运营</span><span class="w-tag">抖音运营</span><span class="w-tag">数据分析</span><span class="w-tag">用户增长</span><span class="w-tag">B2B内容营销</span>
+                </div>
+            </div>
+
+            <!-- Work 6: 广告《无茶不萃》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g3">🎬</div>
+                        <div><h3>广告《无茶不萃》</h3><div class="w-role">导演 · 摄影 · 剪辑 · 雀巢茶萃</div></div>
+                    </div>
+                    <span class="w-cat">内容创作</span>
+                </div>
+                <p class="w-desc">为雀巢茶萃品牌创意广告，独立担任<strong>导演、摄影、剪辑</strong>三重角色。以"全球最佳饮品大赛"为叙事框架，将"茶"与"水蜜桃"拟人化为竞赛选手，通过剧情反转传递果茶融合的产品创新理念。</p>
+                <div class="gal">
+                    <div class="shot show span3" onclick="openLightbox('assets/ad_nestea_main.jpg')">
+                        <img loading="lazy" src="assets/ad_nestea_main.jpg" alt="广告主视觉">
+                        <div class="ov"><span>主视觉 — 第一名究竟花落谁家</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/ad_nestea_still1.jpg')">
+                        <img loading="lazy" src="assets/ad_nestea_still1.jpg" alt="广告剧照1">
+                        <div class="ov"><span>剧照一 — 茶先生与水蜜桃小姐</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/ad_nestea_still2.jpg')">
+                        <img loading="lazy" src="assets/ad_nestea_still2.jpg" alt="广告剧照2">
+                        <div class="ov"><span>剧照二 — 竞赛现场</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/ad_nestea_still3.jpg')">
+                        <img loading="lazy" src="assets/ad_nestea_still3.jpg" alt="广告剧照3">
+                        <div class="ov"><span>剧照三 — 融合诞生</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <div class="w-tags">
+                    <span class="w-tag">导演</span><span class="w-tag">摄影</span><span class="w-tag">剪辑</span><span class="w-tag">品牌广告</span><span class="w-tag">创意策划</span><span class="w-tag">雀巢茶萃</span>
+                </div>
+            </div>
+
+            <!-- Work 7: 学生会主席 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;">
+                        <div class="w-icon g1">🎓</div>
+                        <div><h3>学生会主席 · 校园活动</h3><div class="w-role">全案统筹 · 物料设计 · 导演拍摄 · 剪辑</div></div>
+                    </div>
+                    <span class="w-cat">活动运营</span>
+                </div>
+                <p class="w-desc">统筹6场校级活动，协调7部门120余人。同步主导全媒体宣传物料产出，包含<strong>海报设计、导演拍摄短片、视频剪辑</strong>。</p>
+                <div class="w-results">
+                    <div class="wr"><div class="n">6场</div><div class="d">校级活动</div></div>
+                    <div class="wr"><div class="n">30W+</div><div class="d">直播观看量</div></div>
+                    <div class="wr"><div class="n">15张</div><div class="d">活动海报</div></div>
+                </div>
+                <h4 class="w-sub">🎨 海报 & 物料 & 摄影</h4>
+                <div class="gal">
+                    <div class="shot show" onclick="openLightbox('assets/poster_music_festival.jpg')">
+                        <img loading="lazy" src="assets/poster_music_festival.jpg" alt="音乐节海报">
+                        <div class="ov"><span>超能力奇妙音乐节</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/poster_film_exhibition.jpg')">
+                        <img loading="lazy" src="assets/poster_film_exhibition.jpg" alt="影像展海报">
+                        <div class="ov"><span>让影像成为永恒记忆 · 影像展</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/material_signs.jpg')">
+                        <img loading="lazy" src="assets/material_signs.jpg" alt="手举牌设计">
+                        <div class="ov"><span>手举牌系列 — 春日集市主题</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/photo_still_life.jpg')">
+                        <img loading="lazy" src="assets/photo_still_life.jpg" alt="静物摄影">
+                        <div class="ov"><span>静物 — 窗台上的时光</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/photo_portrait_car.jpg')">
+                        <img loading="lazy" src="assets/photo_portrait_car.jpg" alt="人像摄影">
+                        <div class="ov"><span>人像 — 车窗外的光</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                    <div class="shot show" onclick="openLightbox('assets/photo_cityscape.jpg')">
+                        <img loading="lazy" src="assets/photo_cityscape.jpg" alt="城市风光">
+                        <div class="ov"><span>城市 — 暮色天际线</span><div class="zh">🔍 点击查看大图</div></div>
+                    </div>
+                </div>
+                <div class="w-tags">
+                    <span class="w-tag">活动统筹</span><span class="w-tag">海报设计</span><span class="w-tag">导演拍摄</span><span class="w-tag">视频剪辑</span><span class="w-tag">摄影</span><span class="w-tag">物料设计</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Films -->
+    <section id="films" class="reveal">
+        <span class="stag">FILM & VIDEO</span>
+        <h2 class="stitle g">影视作品集</h2>
+        <p class="ssub">8部影视作品 — 覆盖导演、摄影、剪辑、灯光、美术全流程</p>
+        <div class="works-grid">
+            <!-- Film 1: 微电影《终点》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g1">🎬</div><div><h3>微电影《终点》</h3><div class="w-role">导演 · 剪辑 · 摄影</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">探讨传统教育观念与年轻人数字时代价值追求的代际冲突。获<strong>蓝桥杯视频设计赛道江苏省三等奖</strong>。</p>
+                <div class="gal">
+                    <div class="shot show span3" onclick="openLightbox('assets/film_endpoint_title.png')"><img loading="lazy" src="assets/film_endpoint_title.png" alt="终点标题卡"><div class="ov"><span>标题卡 — 终点</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_endpoint_still1.jpg')"><img loading="lazy" src="assets/film_endpoint_still1.jpg" alt="终点剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_endpoint_still2.png')"><img loading="lazy" src="assets/film_endpoint_still2.png" alt="终点剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">导演</span><span class="w-tag">剪辑</span><span class="w-tag">摄影</span><span class="w-tag">蓝桥杯省三等奖</span></div>
+            </div>
+
+            <!-- Film 2: 广告《雀定是你》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g2">🎨</div><div><h3>广告《雀定是你》</h3><div class="w-role">美术 · 雀巢茶萃品牌广告</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">紧扣雀巢茶萃年轻活力、创新时尚的品牌调性，以拟人化演绎消费者与产品的浪漫恋爱旅程。获<strong>大广赛优秀奖</strong>。</p>
+                <div class="gal">
+                    <div class="shot show span3" onclick="openLightbox('assets/ad_nestea2_main.jpg')"><img loading="lazy" src="assets/ad_nestea2_main.jpg" alt="雀定是你主视觉"><div class="ov"><span>主视觉 — 雀定是你</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/ad_nestea2_still1.jpg')"><img loading="lazy" src="assets/ad_nestea2_still1.jpg" alt="雀定是你剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/ad_nestea2_still2.jpg')"><img loading="lazy" src="assets/ad_nestea2_still2.jpg" alt="雀定是你剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">美术</span><span class="w-tag">品牌广告</span><span class="w-tag">大广赛优秀奖</span><span class="w-tag">雀巢茶萃</span></div>
+            </div>
+
+            <!-- Film 3: 剧情片《间隙》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g3">🔦</div><div><h3>剧情片《间隙》</h3><div class="w-role">灯光</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">离异父亲深夜寻找离家女儿的故事，以冷峻夜景与急促节奏剖开现代家庭疏离。获<strong>金鸡奖手机影像计划入围</strong>。</p>
+                <div class="gal">
+                    <div class="shot show" onclick="openLightbox('assets/film_gap_still1.jpg')"><img loading="lazy" src="assets/film_gap_still1.jpg" alt="间隙剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_gap_still2.png')"><img loading="lazy" src="assets/film_gap_still2.png" alt="间隙剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_gap_still3.png')"><img loading="lazy" src="assets/film_gap_still3.png" alt="间隙剧照3"><div class="ov"><span>剧照三</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">灯光</span><span class="w-tag">金鸡奖入围</span><span class="w-tag">夜景拍摄</span></div>
+            </div>
+
+            <!-- Film 4: 剧情片《茉莉》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g4">✂️</div><div><h3>剧情片《茉莉》</h3><div class="w-role">灯光 · 剪辑</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">心理治疗师与患者在催眠治疗中相互治愈的故事，以茉莉花、纸船和风铃为意象，探讨失去与释怀的主题。</p>
+                <div class="gal">
+                    <div class="shot show" onclick="openLightbox('assets/film_jasmine_still1.png')"><img loading="lazy" src="assets/film_jasmine_still1.png" alt="茉莉剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_jasmine_still2.jpg')"><img loading="lazy" src="assets/film_jasmine_still2.jpg" alt="茉莉剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_jasmine_still3.jpg')"><img loading="lazy" src="assets/film_jasmine_still3.jpg" alt="茉莉剧照3"><div class="ov"><span>剧照三</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">灯光</span><span class="w-tag">剪辑</span><span class="w-tag">心理叙事</span></div>
+            </div>
+
+            <!-- Film 5: MV《给我一个理由忘记》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g5">🎵</div><div><h3>MV《给我一个理由忘记》</h3><div class="w-role">摄影 · 灯光</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">七年恋情瓦解后女主角重走往昔之路的叙事MV，以光影变化映射从幻想破灭到自我释怀的情感弧光。</p>
+                <div class="gal">
+                    <div class="shot show span3" onclick="openLightbox('assets/mv_reason_main.jpg')"><img loading="lazy" src="assets/mv_reason_main.jpg" alt="MV主视觉"><div class="ov"><span>主视觉</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/mv_reason_still1.jpg')"><img loading="lazy" src="assets/mv_reason_still1.jpg" alt="MV剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/mv_reason_still2.png')"><img loading="lazy" src="assets/mv_reason_still2.png" alt="MV剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">摄影</span><span class="w-tag">灯光</span><span class="w-tag">MV</span></div>
+            </div>
+
+            <!-- Film 6: 纪录片《趁现在》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g6">📹</div><div><h3>纪录片《趁现在》</h3><div class="w-role">执行导演</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">以妥瑞氏症患者"蚊子"为核心，采用"工作-原生家庭-爱情"三位框架构建叙事，深入挖掘生命韧性与情感救赎。</p>
+                <div class="gal">
+                    <div class="shot show span3" onclick="openLightbox('assets/film_now_main.png')"><img loading="lazy" src="assets/film_now_main.png" alt="趁现在主视觉"><div class="ov"><span>主视觉</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_now_still1.jpg')"><img loading="lazy" src="assets/film_now_still1.jpg" alt="趁现在剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_now_still2.png')"><img loading="lazy" src="assets/film_now_still2.png" alt="趁现在剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">执行导演</span><span class="w-tag">纪录片</span><span class="w-tag">人物叙事</span></div>
+            </div>
+
+            <!-- Film 7: 纪录片《福喜寿》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g1">📷</div><div><h3>纪录片《福喜寿》</h3><div class="w-role">摄影</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">用镜头定格山东花饽饽制作匠人的专注匠心，记录传承者口述的温情故事，探寻花饽饽背后的文化密码。</p>
+                <div class="gal">
+                    <div class="shot show" onclick="openLightbox('assets/film_fuxishou_still1.jpg')"><img loading="lazy" src="assets/film_fuxishou_still1.jpg" alt="福喜寿剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_fuxishou_still2.jpg')"><img loading="lazy" src="assets/film_fuxishou_still2.jpg" alt="福喜寿剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_fuxishou_still3.jpg')"><img loading="lazy" src="assets/film_fuxishou_still3.jpg" alt="福喜寿剧照3"><div class="ov"><span>剧照三</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">摄影</span><span class="w-tag">纪录片</span><span class="w-tag">非遗文化</span></div>
+            </div>
+
+            <!-- Film 8: 文旅片《文人笔下的城》 -->
+            <div class="work">
+                <div class="w-head">
+                    <div style="display:flex;align-items:center;gap:14px;"><div class="w-icon g2">🏔️</div><div><h3>文旅片《文人笔下的城》</h3><div class="w-role">摄影 · 航拍</div></div></div>
+                    <span class="w-cat">影视创作</span>
+                </div>
+                <p class="w-desc">以"海、岛、山、城"为线索展现山东烟台独特魅力，从新石器时代到明清海防，七千年岁月沉淀于每一寸土地。</p>
+                <div class="gal">
+                    <div class="shot show span3" onclick="openLightbox('assets/film_yantai_main.png')"><img loading="lazy" src="assets/film_yantai_main.png" alt="文人笔下的城主视觉"><div class="ov"><span>主视觉 — 仙境海岸 鲜美烟台</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_yantai_still1.jpg')"><img loading="lazy" src="assets/film_yantai_still1.jpg" alt="烟台剧照1"><div class="ov"><span>剧照一</span><div class="zh">🔍 点击查看大图</div></div></div>
+                    <div class="shot show" onclick="openLightbox('assets/film_yantai_still2.png')"><img loading="lazy" src="assets/film_yantai_still2.png" alt="烟台剧照2"><div class="ov"><span>剧照二</span><div class="zh">🔍 点击查看大图</div></div></div>
+                </div>
+                <div class="w-tags"><span class="w-tag">摄影</span><span class="w-tag">航拍</span><span class="w-tag">文旅片</span><span class="w-tag">烟台</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="reveal">
+        <span class="stag">SKILLS</span>
+        <h2 class="stitle g">技能矩阵</h2>
+        <p class="ssub">技术理解力 × 运营方法论 × 内容创作力——三位一体的能力体系</p>
+        <div class="skills-grid">
+            <div class="sk">
+                <div class="si" style="background:var(--grad-p);">🤖</div>
+                <h4>AI多模态落地</h4>
+                <div class="sk-tags">
+                    <span class="sk-tag">Prompt工程</span><span class="sk-tag">Midjourney</span><span class="sk-tag">Pika</span><span class="sk-tag">Runway</span><span class="sk-tag">Coze智能体</span><span class="sk-tag">模型评测</span><span class="sk-tag">AIGC内容生产</span>
+                </div>
+            </div>
+            <div class="sk">
+                <div class="si" style="background:var(--grad-c);">📊</div>
+                <h4>数据与标准化</h4>
+                <div class="sk-tags">
+                    <span class="sk-tag">SQL数据整理</span><span class="sk-tag">量化评估指标</span><span class="sk-tag">SOP搭建</span><span class="sk-tag">内容模板标准化</span><span class="sk-tag">数据复盘迭代</span><span class="sk-tag">用户行为分析</span>
+                </div>
+            </div>
+            <div class="sk">
+                <div class="si" style="background:var(--grad-w);">🎬</div>
+                <h4>内容 & 直播运营</h4>
+                <div class="sk-tags">
+                    <span class="sk-tag">短视频策划制作</span><span class="sk-tag">商业宣传物料</span><span class="sk-tag">全平台账号运营</span><span class="sk-tag">直播推流</span><span class="sk-tag">线上互动活动</span>
+                </div>
+            </div>
+            <div class="sk">
+                <div class="si" style="background:linear-gradient(135deg,#f59e0b,#ec4899);">🛠️</div>
+                <h4>协同工具</h4>
+                <div class="sk-tags">
+                    <span class="sk-tag">Premiere Pro</span><span class="sk-tag">After Effects</span><span class="sk-tag">达芬奇</span><span class="sk-tag">SQL</span><span class="sk-tag">多机位直播设备</span><span class="sk-tag">Trae</span><span class="sk-tag">AIGC工具链</span>
+                </div>
+            </div>
+            <div class="sk">
+                <div class="si" style="background:linear-gradient(135deg,#10b981,#06b6d4);">🎯</div>
+                <h4>活动 & 用户运营</h4>
+                <div class="sk-tags">
+                    <span class="sk-tag">活动全案策划</span><span class="sk-tag">社群运营</span><span class="sk-tag">用户分层运营</span><span class="sk-tag">转化漏斗优化</span><span class="sk-tag">跨部门协作</span>
+                </div>
+            </div>
+            <div class="sk">
+                <div class="si" style="background:linear-gradient(135deg,#8b5cf6,#6366f1);">💪</div>
+                <h4>综合能力</h4>
+                <div class="sk-tags">
+                    <span class="sk-tag">跨部门沟通</span><span class="sk-tag">多项目并行管控</span><span class="sk-tag">项目落地跟进</span><span class="sk-tag">流程体系搭建</span><span class="sk-tag">团队培训</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-sec reveal">
+        <div class="contact-card">
+            <span class="stag">CONTACT</span>
+            <h2>期待与字节跳动共创</h2>
+            <p>随时可以沟通面试安排，期待与您交流</p>
+            <div class="cm-row">
+                <a href="tel:13451622125" class="cm"><div class="ci" style="background:var(--grad-p);">📞</div><span>13451622125</span></a>
+                <a href="mailto:1492423633@qq.com" class="cm"><div class="ci" style="background:var(--grad-c);">✉️</div><span>1492423633@qq.com</span></a>
+                <a href="https://wx.qq.com/" class="cm" target="_blank"><div class="ci" style="background:linear-gradient(135deg,#10b981,#06b6d4);">💬</div><span>微信同手机号</span></a>
+            </div>
+            <a href="#works" class="btn-p">返回查看作品 ↑</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 李继豪 · 个人作品集</p>
+        <p style="margin-top:6px;font-size:.72rem;color:var(--muted);">南京传媒学院 · 智能媒体工程学院 · 数字媒体技术专业</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lb" id="lightbox" onclick="closeLightbox()">
+        <button class="lb-close" onclick="closeLightbox()">✕</button>
+        <img loading="lazy" id="lb-img" src="" alt="截图大图">
+    </div>
+
+    <script>
+        const navbar=document.getElementById('navbar');
+        window.addEventListener('scroll',()=>{if(window.scrollY>50){navbar.classList.add('scrolled')}else{navbar.classList.remove('scrolled')}});
+        const obs=new IntersectionObserver((e)=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -60px 0px'});
+        document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth'})})});
+        function openLightbox(src){const lb=document.getElementById('lightbox');document.getElementById('lb-img').src=src;lb.classList.add('active');document.body.style.overflow='hidden'}
+        function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow=''}
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+
+        // Auto-retry failed images (CDN propagation fix)
+        (function(){
+            var maxR=8,retryD=2000,rc={};
+            function retry(el,src,tag){
+                rc[src]=(rc[src]||0)+1;
+                if(rc[src]<=maxR){
+                    setTimeout(function(){
+                        var ns=src+'?r='+rc[src]+'_'+Date.now();
+                        if(tag==='img'){el.src=ns;}else{el.src=ns;el.parentElement&&el.parentElement.load&&el.parentElement.load();}
+                    },retryD*rc[src]);
+                }
+            }
+            document.querySelectorAll('img').forEach(function(img){
+                img.addEventListener('error',function(){
+                    var s=this.src.split('?')[0];retry(this,s,'img');
+                });
+            });
+            document.querySelectorAll('video source').forEach(function(source){
+                var v=source.parentElement;
+                if(v){v.addEventListener('error',function(){
+                    var s=source.src.split('?')[0];retry(source,s,'video');
+                });}
+            });
+        })();
+    </script>
+</body>
+</html>
