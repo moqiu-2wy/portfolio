@@ -1,0 +1,2 @@
+Vercel CLI 58.5.1 (Node.js 22.16.0)
+Error: An unexpected error occurred in login: TypeError: Cannot convert argument to a ByteString because the character at index 0 has a value of 33487 which is greater than 255.
